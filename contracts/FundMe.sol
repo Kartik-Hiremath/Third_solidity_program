@@ -4,6 +4,8 @@
 pragma solidity ^0.8.20;
 
 import {PriceConverter} from "./PriceConverter.sol";
+import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+
 
 error NotOwner();
 
@@ -36,6 +38,11 @@ contract FundMe{
         require(transactionSuccess, "The Withdrawal Failed!");
     }
 
+    function getVersionNDecimals() public view returns(uint256, uint8) {
+        AggregatorV3Interface obj = AggregatorV3Interface(0xfEefF7c3fB57d18C5C6Cdd71e45D2D0b4F9377bF);
+        return (obj.version(), obj.decimals());
+    }
+
     modifier ownerOnly() {
         // require(msg.sender == i_OwnerOfContract, "You are not the owner of this contract.");
         // require(msg.sender == i_OwnerOfContract, NotOwner());
@@ -43,10 +50,20 @@ contract FundMe{
             revert NotOwner();
         _;  // This means continue the rest of the code.
     }
+
+    receive() external payable{
+        fund();
+    }
+
+    fallback() external payable{
+        fund();
+    }
 }
 
 /* NOTE :
     1. Initially the contract costs : 595855 gas, after using constant: 575550 gas, after using immutable: 553047
     2. MIN_USD call : 2400 gas to 300 gas after using constant.
     3. For the constructor no need to specify public.
+    4. Sepolia testnet : ETH/USD contract address : 0x694AA1769357215DE4FAC081bf1f309aDC325306
+    5. zkSync testnet : ETH/USD contract address : 0xfEefF7c3fB57d18C5C6Cdd71e45D2D0b4F9377bF
 */

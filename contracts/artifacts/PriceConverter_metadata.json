@@ -36,24 +36,6 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getVersionNDecimals",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint8",
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -92,11 +74,11 @@
 			]
 		},
 		"contracts/PriceConverter.sol": {
-			"keccak256": "0xb4e20f8910fc79d761930e7831d32191bc2bff1350f62620696334d6de99c184",
+			"keccak256": "0xb48b10d361ae64a47d134a289c158a77088fbcd392d5032d060eb0145f24240c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1962a4b861db2c8fe76653ed0acb7c95c1dd431e65a3881d03e0432c77dc4881",
-				"dweb:/ipfs/QmeyZNowg5sMcVraefKHR6LRouQtJz256AXNedBXxPas45"
+				"bzz-raw://cdacbe8f3b07cfb67a271080c557a01b4e9467bb321486198dcc79d88bcea4bb",
+				"dweb:/ipfs/QmTnHBk9t8ZK3LARdb4DCJNqGFT1PPeVJ8nZuRFvr9uKfy"
 			]
 		}
 	},

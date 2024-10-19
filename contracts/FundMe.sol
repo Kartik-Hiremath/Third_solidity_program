@@ -9,9 +9,9 @@ contract FundMe{
 
     using PriceConverter for uint256;
 
-    uint256 minUsd = 2 * 1e18;
+    uint256 public minUsd = 2 * 1e18;
     address[] public funders;
-    mapping(address funder => uint256 amount) funderToAmountMap;
+    mapping(address funder => uint256 amount) public funderToAmountMap;
     address public ownerOfContract;
 
     constructor(){  // No need to mention public.

@@ -12,6 +12,11 @@ contract FundMe{
     uint256 minUsd = 2 * 1e18;
     address[] public funders;
     mapping(address funder => uint256 amount) funderToAmountMap;
+    address public ownerOfContract;
+
+    constructor(){  // No need to mention public.
+        ownerOfContract = msg.sender;
+    }
 
     function fund() public payable{
         require(msg.value.getConversionRate() >= minUsd, "Ether amount not sufficient.Please send atleast $2 worth of ether.");
@@ -19,7 +24,7 @@ contract FundMe{
         funderToAmountMap[msg.sender] = funderToAmountMap[msg.sender] + msg.value;
     }
 
-    function withdraw() public {
+    function withdraw() public ownerOnly {
         for(uint256 i=0; i<funders.length; i++){
             funderToAmountMap[funders[i]] = 0;
         }
@@ -28,5 +33,10 @@ contract FundMe{
         // bool transactionSuccess = payable(msg.sender).send(address(this).balance);
         (bool transactionSuccess, ) = payable(msg.sender).call{value : address(this).balance}("");
         require(transactionSuccess, "The Withdrawal Failed!");
+    }
+
+    modifier ownerOnly() {
+        require(msg.sender == ownerOfContract, "You are not the owner of this contract.");
+        _;  // This means continue the rest of the code.
     }
 }
